@@ -13,12 +13,12 @@ reqs = [str(ir.req) for ir in install_reqs]
 test_reqs = [str(ir.req) for ir in testing_reqs]
 
 
-setup(name='ocm-client',
+setup(name='hermes',
       version='1.0',
-      description='Provides a client library interface for interacting with the OCM system',
+      description='Provides a hermes library interface for interacting with the OCM system',
       author='DCU',
       author_email='dcueng@godaddy.com',
-      url='https://github.secureserver.net/ITSecurity/ocm-client',
+      url='https://github.secureserver.net/ITSecurity/hermes',
       install_requires=reqs,
       tests_require=test_reqs,
       test_suite="nose.collector"

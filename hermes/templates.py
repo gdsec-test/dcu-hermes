@@ -1,3 +1,13 @@
+"""
+Templates.py is responsible for housing all OCM templates. These are templates are organized by type and scoped with
+an appropriate namespace to avoid conflicts. e.g. registered.suspend and hosted.suspend.
+
+One must pass the fully qualified template name to send_mail e.g. <namespace>.<template>. Failure to pass in this format
+will result in an error.
+
+"""
+
+''' Registered Only Namespace Templates '''
 _registered_templates = {
     'suspend_intentionally_malicious': {  # Template ID 4044
         'templateNamespaceKey': 'Iris',
@@ -23,6 +33,7 @@ _registered_templates = {
     }
 }
 
+''' Hosted Namespace Templates '''
 _hosted_templates = {
     'suspension_warning': {  # Template ID 3996
         'templateNamespaceKey': 'Iris',
@@ -56,6 +67,7 @@ _hosted_templates = {
     }
 }
 
+''' CSAM Namespace Templates '''
 _csam_templates = {
     'user_gen_warning': {  # Template ID 4070
         'templateNamespaceKey': 'Iris',
@@ -66,6 +78,7 @@ _csam_templates = {
     }
 }
 
+''' Fraud Namespace Templates '''
 _fraud_templates = {
     'new_shopper_account': {  # Template ID 3693
         'templateNamespaceKey': 'Iris',
@@ -99,7 +112,7 @@ _fraud_templates = {
     }
 }
 
-
+''' Foreign Namespace Templates '''
 _foreign_templates = {
     'hosting_abuse_notice': {  # Template ID 3103/3104
         'templateNamespaceKey': 'Hosting',
@@ -109,7 +122,6 @@ _foreign_templates = {
     }
 }
 
-
 namespace_mappings = {
     'fraud': _fraud_templates,
     'csam': _csam_templates,
@@ -118,7 +130,7 @@ namespace_mappings = {
     'foreign': _foreign_templates
 }
 
-templates = []
+templates = []  # Provides a list of all fully qualified template names <namespace>.<template>
 for namespace, mappings in namespace_mappings.iteritems():
     for template_name, _ in mappings.iteritems():
         templates.append(namespace + '.' + template_name)

@@ -1,4 +1,4 @@
-from connectors.ocm import OCMClient
+from hermes.connectors.ocm import OCMClient
 
 
 class Factory:
