@@ -2,7 +2,7 @@ from hermes.exceptions import UnsupportedNamespaceException, \
     InvalidSubstitutionValuesException, \
     UnsupportedTemplateException
 
-from hermes.mailers.factory import Factory
+from hermes.mailers.factory import MailerFactory
 from templates import namespace_mappings
 
 
@@ -33,5 +33,5 @@ def send_mail(template, substitution_values, **kwargs):
                     'templateTypeKey': mapping.get('templateTypeKey'),
                     'substitutionValues': substitution_values}
 
-    mailer = Factory.get_mailer(namespace, **kwargs)
+    mailer = MailerFactory.get_mailer(namespace, **kwargs)
     return mailer.send_mail(email_params, **kwargs)
