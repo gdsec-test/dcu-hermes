@@ -22,7 +22,10 @@ class RegisteredMailer(Mailer):
     def __init__(self, env=None, cert=None, key=None):
         self._client = OCMClient(env, (cert, key))
 
-    def send_mail(self, email_params, **kwargs):
+    def send_mail(self, email_params, recipients=None, **kwargs):
+        if recipients:
+            email_params['recipients'] = recipients
+
         return self._client.send_shopper_email(email_params)
 
 
@@ -30,7 +33,10 @@ class HostedMailer(Mailer):
     def __init__(self, env=None, cert=None, key=None):
         self._client = OCMClient(env, (cert, key))
 
-    def send_mail(self, email_params, **kwargs):
+    def send_mail(self, email_params, recipients=None, **kwargs):
+        if recipients:
+            email_params['recipients'] = recipients
+
         return self._client.send_shopper_email(email_params)
 
 
@@ -38,7 +44,10 @@ class CSAMMailer(Mailer):
     def __init__(self, env=None, cert=None, key=None):
         self._client = OCMClient(env, (cert, key))
 
-    def send_mail(self, email_params, **kwargs):
+    def send_mail(self, email_params, recipients=None, **kwargs):
+        if recipients:
+            email_params['recipients'] = recipients
+
         return self._client.send_shopper_email(email_params)
 
 
@@ -47,10 +56,9 @@ class FraudMailer(Mailer):
         self._client = OCMClient(env, (cert, key))
 
     def send_mail(self, email_params, recipients=None, **kwargs):
-        if not recipients:
-            recipients = []
+        if recipients:
+            email_params['recipients'] = recipients
 
-        email_params['recipients'] = recipients
         return self._client.send_non_shopper_email(email_params)
 
 
@@ -59,9 +67,8 @@ class ForeignMailer(Mailer):
         self._client = OCMClient(env, (cert, key))
 
     def send_mail(self, email_params, recipients=None, **kwargs):
-        if not recipients:
-            recipients = []
+        if recipients:
+            email_params['recipients'] = recipients
 
-        email_params['recipients'] = recipients
         return self._client.send_non_shopper_email(email_params)
 
