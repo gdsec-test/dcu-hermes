@@ -2,11 +2,12 @@ import json
 
 import requests
 
-from hermes.exceptions import UnsupportedEnvironmentException
+from hermes.exceptions import UnsupportedEnvironmentException, OCMException
 
 
 class OCMClient:
     supported_environments = ['dev', 'prod']
+    success_status = ['PURGED', 'PENDING', 'SUCCESS']  # Everything but 'FAILED'
 
     def __init__(self, env, cert):
         if env not in self.supported_environments:
@@ -23,20 +24,42 @@ class OCMClient:
 
     def send_shopper_email(self, email_params):
         headers = {'Accept': 'application/json',
-                   'Content-Type': 'application/json',
                    'X-Shopper-Id': email_params.get('substitutionValues').get('ACCOUNT_NUMBER')}
 
-        response = requests.post(self.shopper_endpoint, headers=headers, json=email_params, cert=self._cert)
+        response = requests.post(self.shopper_endpoint,
+                                 headers=headers,
+                                 json=email_params,
+                                 cert=self._cert)
 
         response.raise_for_status()
         return json.loads(response.text)
 
     def send_non_shopper_email(self, email_params):
         headers = {'Accept': 'application/json',
-                   'Content-Type': 'application/json',
                    'X-Private-Label-Id': '1'}
 
-        response = requests.post(self.non_shopper_endpoint, headers=headers, json=email_params, cert=self._cert)
+        response = requests.post(self.non_shopper_endpoint,
+                                 headers=headers,
+                                 json=email_params,
+                                 cert=self._cert)
 
         response.raise_for_status()
         return json.loads(response.text)
+
+    def get_status(self, message_id):
+        assert isinstance(message_id, basestring)
+
+        headers = {'Accept': 'application/json',
+                   'Content-Type': 'application/json'}
+
+        response = requests.get(self.shopper_endpoint + '/' + message_id,
+                                headers=headers,
+                                cert=self._cert)
+
+        response.raise_for_status()
+        resp_dict = json.loads(response.text)
+
+        if resp_dict.get('status') not in self.success_status:
+            raise OCMException(resp_dict.get('failureReason'))
+        return resp_dict.get('status')
+

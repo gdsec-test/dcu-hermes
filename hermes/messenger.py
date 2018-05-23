@@ -35,3 +35,17 @@ def send_mail(template, substitution_values, **kwargs):
 
     mailer = MailerFactory.get_mailer(namespace, **kwargs)
     return mailer.send_mail(email_params, **kwargs)
+
+
+def get_status(template, identifier, **kwargs):
+
+    namespace, t = template.split('.')
+
+    if namespace not in namespace_mappings:
+        raise UnsupportedNamespaceException("Unsupported namespace {}".format(namespace))
+
+    if t not in namespace_mappings[namespace]:
+        raise UnsupportedTemplateException("Unsupported template {}".format(t))
+
+    mailer = MailerFactory.get_mailer(namespace, **kwargs)
+    return mailer.get_status(identifier, **kwargs)

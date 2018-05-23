@@ -118,7 +118,8 @@ _foreign_templates = {
         'templateNamespaceKey': 'Hosting',
         'templateTypeKey': 'AbuseRegOnlyToHost',
         'substitutionValues': ['DOMAIN',
-                               'SANITIZED_URL']
+                               'SANITIZED_URL',
+                               'IPADDRESS']
     }
 }
 
