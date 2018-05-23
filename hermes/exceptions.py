@@ -12,3 +12,7 @@ class InvalidSubstitutionValuesException(Exception):
 
 class UnsupportedEnvironmentException(Exception):
     """ A request for an email in an unsupported environment """
+
+
+class OCMException(Exception):
+    """ Any error that may be returned via the OCM system """
