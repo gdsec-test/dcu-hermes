@@ -35,10 +35,7 @@ class RegisteredMailer(Mailer):
     def __init__(self, env=None, cert=None, key=None, **kwargs):
         self._client = OCMClient(env, (cert, key))
 
-    def send_mail(self, email_params, recipients=None, **kwargs):
-        if recipients:
-            email_params['recipients'] = recipients
-
+    def send_mail(self, email_params, **kwargs):
         return self._client.send_shopper_email(email_params)
 
     def get_status(self, identifier, **kwargs):
@@ -49,10 +46,7 @@ class HostedMailer(Mailer):
     def __init__(self, env=None, cert=None, key=None, **kwargs):
         self._client = OCMClient(env, (cert, key))
 
-    def send_mail(self, email_params, recipients=None, **kwargs):
-        if recipients:
-            email_params['recipients'] = recipients
-
+    def send_mail(self, email_params, **kwargs):
         return self._client.send_shopper_email(email_params)
 
     def get_status(self, identifier, **kwargs):
@@ -63,10 +57,7 @@ class CSAMMailer(Mailer):
     def __init__(self, env=None, cert=None, key=None, **kwargs):
         self._client = OCMClient(env, (cert, key))
 
-    def send_mail(self, email_params, recipients=None, **kwargs):
-        if recipients:
-            email_params['recipients'] = recipients
-
+    def send_mail(self, email_params, **kwargs):
         return self._client.send_shopper_email(email_params)
 
     def get_status(self, identifier, **kwargs):

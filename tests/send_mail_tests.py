@@ -32,13 +32,13 @@ class TestSendMail:
 
     ''' Tests creation of each specific mailer '''
     def test_send_unsupported_environment(self):
-        substitution_values = {'DOMAIN': 'test-domain', 'SANITIZED_URL': 'hxxp://godaddy.com'}
+        substitution_values = {'DOMAIN': 'test-domain', 'SANITIZED_URL': 'hxxp://godaddy.com', 'IPADDRESS': 'test-ip'}
         assert_raises(UnsupportedEnvironmentException,
                       send_mail, 'foreign.hosting_abuse_notice', substitution_values)
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
     def test_send_foreign(self, mock_post):
-        substitution_values = {'DOMAIN': 'test-domain', 'SANITIZED_URL': 'hxxp://godaddy.com'}
+        substitution_values = {'DOMAIN': 'test-domain', 'SANITIZED_URL': 'hxxp://godaddy.com', 'IPADDRESS': 'test-ip'}
         actual = send_mail('foreign.hosting_abuse_notice', substitution_values, **{'recipients': 'no-reply@godaddy.com',
                                                                                    'env': 'dev'})
         assert_equal({'request_id': 'test-id'}, actual)
