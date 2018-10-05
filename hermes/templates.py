@@ -123,12 +123,22 @@ _foreign_templates = {
     }
 }
 
+''' Iris Shim Templates '''
+_iris_shim_templates = {
+    'failed_to_parse_report': {  # Template ID 4320/4321
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'ReportAbuse',
+        'substitutionValues': []
+    }
+}
+
 namespace_mappings = {
     'fraud': _fraud_templates,
     'csam': _csam_templates,
     'hosted': _hosted_templates,
     'registered': _registered_templates,
-    'foreign': _foreign_templates
+    'foreign': _foreign_templates,
+    'iris_shim': _iris_shim_templates
 }
 
 templates = []  # Provides a list of all fully qualified template names <namespace>.<template>

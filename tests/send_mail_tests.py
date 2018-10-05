@@ -67,3 +67,9 @@ class TestSendMail:
                                'MALICIOUS_ACTIVITY': '', 'SHOPPER_CREATION_DATE': '', 'SANITIZED_URL': ''}
         actual = send_mail('fraud.new_shopper_account', substitution_values, **{'env': 'dev'})
         assert_equal({'request_id': 'test-id'}, actual)
+
+    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
+    def test_send_fail_parse(self, mock_post):
+        substitution_values = {}
+        actual = send_mail('iris_shim.failed_to_parse_report', substitution_values, **{'env': 'dev'})
+        assert_equal({'request_id': 'test-id'}, actual)

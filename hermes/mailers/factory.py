@@ -2,7 +2,8 @@ from hermes.mailers.interface import RegisteredMailer, \
     HostedMailer, \
     CSAMMailer, \
     FraudMailer, \
-    ForeignMailer
+    ForeignMailer, \
+    IrisShimMailer
 
 class MailerFactory:
     @staticmethod
@@ -17,3 +18,5 @@ class MailerFactory:
             return FraudMailer(**kwargs)
         elif mailer_type == 'foreign':
             return ForeignMailer(**kwargs)
+        elif mailer_type == 'iris_shim':
+            return IrisShimMailer(**kwargs)
