@@ -1,6 +1,7 @@
 import abc
 
 from hermes.connectors.ocm import OCMClient
+from hermes.exceptions import UnsupportedValueException
 
 
 class Mailer:
@@ -34,7 +35,23 @@ class Mailer:
 
 
 class RegisteredMailer(Mailer):
-    def send_mail(self, email_params, **kwargs):
+    def send_mail(self, email_params, domain_id=None, **kwargs):
+        """
+        ICANN requires domain admin contact be included in warnings/suspension notices sent to customer. email_params
+        updated to include new payload details that meet this requirement.
+        """
+        try:
+            domain_id = int(domain_id)
+        except Exception:
+            raise UnsupportedValueException("Invalid domainId value provided: {}".format(domain_id))
+        email_params.update({
+            'sendToShopper': True,
+            'transformationData': {
+                'domainContactLookup': ['Administrative'],
+                'domains':  [{'id': domain_id, 'name': email_params.get('substitutionValues').get('DOMAIN')}]
+            }
+        })
+
         return self._client.send_shopper_email(email_params)
 
 

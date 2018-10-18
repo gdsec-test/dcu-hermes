@@ -16,3 +16,7 @@ class UnsupportedEnvironmentException(Exception):
 
 class OCMException(Exception):
     """ Any error that may be returned via the OCM system """
+
+
+class UnsupportedValueException(Exception):
+    """ An unsupported value was provided """
