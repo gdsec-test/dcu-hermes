@@ -42,7 +42,6 @@ _hosted_templates = {
                                'DOMAIN',
                                'MALICIOUS_CONTENT_REPORTED']
     },
-
     'content_removed': {  # Template ID 3994
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'DCUContentRemoved',
@@ -50,7 +49,6 @@ _hosted_templates = {
                                'DOMAIN',
                                'MALICIOUS_CONTENT_REMOVED']
     },
-
     'suspend': {  # Template ID 3998
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'DCUHostingSuspension',
@@ -128,6 +126,16 @@ _iris_shim_templates = {
     'failed_to_parse_report': {  # Template ID 4320/4321
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'ReportAbuse',
+        'substitutionValues': []
+    },
+    'report_successfully_parsed': { # Template ID 4396/4397
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'AbuseReportReceived',
+        'substitutionValues': []
+    },
+    'report_successfully_closed': { # Template ID 4394/4395
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'AbuseReportFinished',
         'substitutionValues': []
     }
 }
