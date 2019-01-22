@@ -1,24 +1,28 @@
-#!/usr/bin/env python
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
-from pip.req import parse_requirements
+with open('requirements.txt') as f:
+    install_reqs = f.read().splitlines()
 
-install_reqs = parse_requirements('requirements.txt', session=False)
-testing_reqs = parse_requirements('test_requirements.txt', session=False)
+with open('test_requirements.txt') as f:
+    testing_reqs = f.read().splitlines()
 
-reqs = [str(ir.req) for ir in install_reqs]
-test_reqs = [str(ir.req) for ir in testing_reqs]
+with open('README.md') as f:
+    long_description = f.read()
 
 
-setup(name='hermes',
-      version='1.0',
-      description='Hermes provides an interface for interacting with GoDaddy messaging systems',
-      author='DCU',
-      author_email='dcueng@godaddy.com',
-      url='https://github.secureserver.net/ITSecurity/hermes',
-      packages=find_packages(),
-      long_description=open('README.md').read(),
-      install_requires=reqs,
-      tests_require=test_reqs,
-      test_suite="nose.collector"
-      )
+setup(
+    name='hermes',
+    version='1.0',
+    author='DCU',
+    author_email='dcueng@godaddy.com',
+    description='Hermes provides an interface for interacting with GoDaddy messaging systems',
+    long_description=long_description,
+    url='https://github.secureserver.net/ITSecurity/hermes',
+    packages=find_packages(exclude=['tests']),
+    install_requires=install_reqs,
+    tests_require=testing_reqs,
+    test_suite='nose.collector',
+    classifiers=[
+        'Programming Language :: Python :: 2.7'
+    ]
+)
