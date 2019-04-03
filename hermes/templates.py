@@ -140,13 +140,23 @@ _iris_shim_templates = {
     }
 }
 
+_smtp_templates = {
+    'ssl_revocation': {
+        'to': 'practices@godaddy.com',
+        'from': 'dcuinternal@godaddy.com',
+        'email_body': '''Hello,\n\nThe Digital Crimes Unit is requesting the revocation of an SSL due to Terms of Service violations.\nCommon Name: {DOMAIN}\nShopper Number: {SHOPPER} \n\n\nRegards,\nDigital Crimes Unit \nGoDaddy''',
+        'substitutionValues': ['DOMAIN', 'SHOPPER']
+    }
+}
+
 namespace_mappings = {
     'fraud': _fraud_templates,
     'csam': _csam_templates,
     'hosted': _hosted_templates,
     'registered': _registered_templates,
     'foreign': _foreign_templates,
-    'iris_shim': _iris_shim_templates
+    'iris_shim': _iris_shim_templates,
+    'smtp': _smtp_templates
 }
 
 templates = []  # Provides a list of all fully qualified template names <namespace>.<template>

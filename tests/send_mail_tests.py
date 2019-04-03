@@ -6,7 +6,8 @@ from nose.tools import assert_raises, assert_equal
 from hermes.exceptions import UnsupportedTemplateException, \
     UnsupportedNamespaceException, \
     InvalidSubstitutionValuesException, \
-    UnsupportedEnvironmentException
+    UnsupportedEnvironmentException, \
+    InvalidEmailRecipient
 from hermes.messenger import send_mail
 
 
@@ -52,7 +53,7 @@ class TestSendMail:
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
     def test_send_registered(self, mock_post):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://godaddy.com', 'MALICIOUS_ACTIVITY': ''}
-        actual = send_mail('registered.suspend_intentionally_malicious', substitution_values, **{'env': 'dev'})
+        actual = send_mail('registered.suspend_intentionally_malicious', substitution_values, **{'env': 'dev', 'domain_id': 1})
         assert_equal({'request_id': 'test-id'}, actual)
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
@@ -73,3 +74,13 @@ class TestSendMail:
         substitution_values = {}
         actual = send_mail('iris_shim.failed_to_parse_report', substitution_values, **{'env': 'dev'})
         assert_equal({'request_id': 'test-id'}, actual)
+
+    @patch('smtplib.SMTP.sendmail', return_value=None)
+    def test_send_smtp_success(self, mock_sendmail):
+        substitution_values = {'DOMAIN': 'abc.com', 'SHOPPER': '1234'}
+        actual = send_mail('smtp.ssl_revocation', substitution_values, **{'recipients': 'kmurthy@godaddy.com', 'env': 'dev'})
+        assert_equal(actual, 'SUCCESS')
+
+    def test_send_smtp_invalid_recipient(self):
+        substitution_values = {'DOMAIN': 'abc.com', 'SHOPPER': '1234'}
+        assert_raises(InvalidEmailRecipient, send_mail, 'smtp.ssl_revocation', substitution_values, **{'env': 'dev'})

@@ -1,3 +1,5 @@
+import copy
+
 from hermes.exceptions import UnsupportedNamespaceException, \
     InvalidSubstitutionValuesException, \
     UnsupportedTemplateException
@@ -29,9 +31,16 @@ def send_mail(template, substitution_values, **kwargs):
         if k not in expected_values:
             raise InvalidSubstitutionValuesException("Invalid substitution value provided {}".format(k))
 
-    email_params = {'templateNamespaceKey': mapping.get('templateNamespaceKey'),
-                    'templateTypeKey': mapping.get('templateTypeKey'),
-                    'substitutionValues': substitution_values}
+    if namespace == 'smtp':
+        # For all SMTP/XARF related emails
+        email_body = mapping.get('email_body', '')
+        email_params = copy.deepcopy(mapping)
+        email_params.update({'email_body': email_body.format(**substitution_values)})
+    else:
+        # For all emails that need to be sent via OCM
+        email_params = {'templateNamespaceKey': mapping.get('templateNamespaceKey'),
+                        'templateTypeKey': mapping.get('templateTypeKey'),
+                        'substitutionValues': substitution_values}
 
     mailer = MailerFactory.get_mailer(namespace, **kwargs)
     return mailer.send_mail(email_params, **kwargs)

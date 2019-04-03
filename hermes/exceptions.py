@@ -20,3 +20,11 @@ class OCMException(Exception):
 
 class UnsupportedValueException(Exception):
     """ An unsupported value was provided """
+
+
+class SMTPException(Exception):
+    """ Any error that may be returned while sending emails using the smtp library """
+
+
+class InvalidEmailRecipient(Exception):
+    """ The recipient email address was invalid """
