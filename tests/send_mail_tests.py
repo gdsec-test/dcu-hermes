@@ -7,7 +7,7 @@ from hermes.exceptions import UnsupportedTemplateException, \
     UnsupportedNamespaceException, \
     InvalidSubstitutionValuesException, \
     UnsupportedEnvironmentException, \
-    InvalidEmailRecipient
+    InvalidEmailRecipientException
 from hermes.messenger import send_mail
 
 
@@ -83,4 +83,4 @@ class TestSendMail:
 
     def test_send_smtp_invalid_recipient(self):
         substitution_values = {'DOMAIN': 'abc.com', 'SHOPPER': '1234'}
-        assert_raises(InvalidEmailRecipient, send_mail, 'smtp.ssl_revocation', substitution_values, **{'env': 'dev'})
+        assert_raises(InvalidEmailRecipientException, send_mail, 'smtp.ssl_revocation', substitution_values, **{'env': 'dev'})

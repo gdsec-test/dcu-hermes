@@ -1,7 +1,7 @@
 import abc
 import smtplib
 
-from hermes.exceptions import InvalidEmailRecipient, SMTPException
+from hermes.exceptions import InvalidEmailRecipientException, SMTPException
 from smtplib import SMTPRecipientsRefused
 
 
@@ -50,7 +50,7 @@ class SMTP(Mailer):
             server.sendmail(email_params.get('from'), mail_to, email_params.get('email_body'))
             return self.SUCCESS_MSG
         except SMTPRecipientsRefused as e:
-            raise InvalidEmailRecipient('The email recipient {} is invalid. More details: {}'.format(mail_to, e.args))
+            raise InvalidEmailRecipientException('The email recipient {} is invalid. More details: {}'.format(mail_to, e.args))
         except Exception as e:
             raise SMTPException('Error while sending the email. More details : {}'.format(e.args))
         finally:
