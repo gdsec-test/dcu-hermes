@@ -144,8 +144,9 @@ _smtp_templates = {
     'ssl_revocation': {
         'to': 'practices@godaddy.com',
         'from': 'dcuinternal@godaddy.com',
-        'email_body': '''Hello,\n\nThe Digital Crimes Unit is requesting the revocation of an SSL due to Terms of Service violations.\nCommon Name: {DOMAIN}\nShopper Number: {SHOPPER} \n\n\nRegards,\nDigital Crimes Unit \nGoDaddy''',
-        'substitutionValues': ['DOMAIN', 'SHOPPER']
+        'email_body': '''Hello,\n\nThe Digital Crimes Unit is requesting the revocation of an SSL due to Terms of Service violations.
+        \nShopper Number: {SHOPPER}\n\nCertificate Details:\n{CERT_DETAILS}\nRegards,\nDigital Crimes Unit\nGoDaddy''',
+        'substitutionValues': ['CERT_DETAILS', 'SHOPPER']
     }
 }
 

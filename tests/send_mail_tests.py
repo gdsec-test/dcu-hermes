@@ -77,10 +77,12 @@ class TestSendMail:
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_smtp_success(self, mock_sendmail):
-        substitution_values = {'DOMAIN': 'abc.com', 'SHOPPER': '1234'}
+        substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
+                               'SHOPPER': '1234'}
         actual = send_mail('smtp.ssl_revocation', substitution_values, **{'recipients': 'kmurthy@godaddy.com', 'env': 'dev'})
         assert_equal(actual, 'SUCCESS')
 
     def test_send_smtp_invalid_recipient(self):
-        substitution_values = {'DOMAIN': 'abc.com', 'SHOPPER': '1234'}
+        substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
+                               'SHOPPER': '1234'}
         assert_raises(InvalidEmailRecipientException, send_mail, 'smtp.ssl_revocation', substitution_values, **{'env': 'dev'})

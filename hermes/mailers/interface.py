@@ -41,7 +41,7 @@ class SMTP(Mailer):
         server = None
 
         if self.env != 'prod':
-            mail_to = recipients if recipients else ''
+            mail_to = recipients if recipients else []
         else:
             mail_to = email_params.get('to')
 
