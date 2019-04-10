@@ -1,6 +1,7 @@
 import abc
 import smtplib
 
+from email.mime.text import MIMEText
 from hermes.exceptions import InvalidEmailRecipientException, SMTPException
 from smtplib import SMTPRecipientsRefused
 
@@ -46,8 +47,13 @@ class SMTP(Mailer):
             mail_to = email_params.get('to')
 
         try:
+            email_object = MIMEText(email_params.get('email_body'))
+            email_object['Subject'] = email_params.get('subject')
+            email_object['From'] = email_params.get('from')
+            email_object['To'] = ';'.join(mail_to) if isinstance(mail_to, list) else mail_to
+
             server = smtplib.SMTP(self.mail_relay)
-            server.sendmail(email_params.get('from'), mail_to, email_params.get('email_body'))
+            server.sendmail(email_params.get('from'), mail_to, email_object.as_string())
             return self.SUCCESS_MSG
         except SMTPRecipientsRefused as e:
             raise InvalidEmailRecipientException('The email recipient {} is invalid. More details: {}'.format(mail_to, e.args))
