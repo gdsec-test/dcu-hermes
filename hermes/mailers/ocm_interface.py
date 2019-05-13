@@ -55,14 +55,6 @@ class CSAMMailer(OCM):
         return self._client.send_shopper_email(email_params)
 
 
-class FraudMailer(OCM):
-    def send_mail(self, email_params, recipients=None, **kwargs):
-        if recipients:
-            email_params['recipients'] = recipients
-
-        return self._client.send_non_shopper_email(email_params)
-
-
 class ForeignMailer(OCM):
     def send_mail(self, email_params, recipients=None, **kwargs):
         if recipients:

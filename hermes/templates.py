@@ -7,6 +7,8 @@ will result in an error.
 
 """
 
+''' OCM TEMPLATES '''
+
 ''' Registered Only Namespace Templates '''
 _registered_templates = {
     'suspend_intentionally_malicious': {  # Template ID 4044
@@ -76,40 +78,6 @@ _csam_templates = {
     }
 }
 
-''' Fraud Namespace Templates '''
-_fraud_templates = {
-    'new_shopper_account': {  # Template ID 3693
-        'templateNamespaceKey': 'Iris',
-        'templateTypeKey': 'DCU7days',
-        'substitutionValues': ['ACCOUNT_NUMBER',
-                               'BRAND_TARGETED',
-                               'DOMAIN',
-                               'MALICIOUS_ACTIVITY',
-                               'SHOPPER_CREATION_DATE',
-                               'SANITIZED_URL']
-    },
-    'new_domain_registration': {  # Template ID 3716
-        'templateNamespaceKey': 'Iris',
-        'templateTypeKey': 'DCUNewDomainFraud',
-        'substitutionValues': ['ACCOUNT_NUMBER',
-                               'BRAND_TARGETED',
-                               'DOMAIN',
-                               'MALICIOUS_ACTIVITY',
-                               'DOMAIN_CREATION_DATE',
-                               'SANITIZED_URL']
-    },
-
-    'intentionally_malicious_domain': {  # Template ID 3694
-        'templateNamespaceKey': 'Iris',
-        'templateTypeKey': 'DCUSingleClick',
-        'substitutionValues': ['ACCOUNT_NUMBER',
-                               'BRAND_TARGETED',
-                               'DOMAIN',
-                               'MALICIOUS_ACTIVITY',
-                               'SANITIZED_URL']
-    }
-}
-
 ''' Foreign Namespace Templates '''
 _foreign_templates = {
     'hosting_abuse_notice': {  # Template ID 3103/3104
@@ -140,10 +108,68 @@ _iris_shim_templates = {
     }
 }
 
-_smtp_templates = {
-    'ssl_revocation': {
-        'to': 'practices@godaddy.com',
-        'from': 'dcuinternal@godaddy.com',
+''' SMTP TEMPLATES '''
+
+fraud_email = 'ccinquiries@godaddy.com'
+ssl_email = 'practices@godaddy.com'
+dcuinternal_email = 'dcuinternal@godaddy.com'
+
+''' Fraud Namespace Templates '''
+_fraud_templates = {
+    'new_shopper_account': {
+        'to': fraud_email,
+        'from': dcuinternal_email,
+        'subject': 'Malicious activity on a newly created account.',
+        'email_body': '''Dear Fraud,
+        \n\nPlease check account {ACCOUNT_NUMBER} created on {SHOPPER_CREATION_DATE} for possible Fraud.
+        \n{DOMAIN} is being used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
+        \nThe malicious URL is {URL}.
+        \n\nRegards,\nDigital Crimes Unit - Engineers''',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'BRAND_TARGETED',
+                               'DOMAIN',
+                               'MALICIOUS_ACTIVITY',
+                               'SHOPPER_CREATION_DATE',
+                               'URL']
+    },
+    'new_domain_registration': {
+        'to': fraud_email,
+        'from': dcuinternal_email,
+        'subject': 'Suspected malicious activity.',
+        'email_body': '''Dear Fraud,
+        \n\nPlease check account {ACCOUNT_NUMBER} which owns domain {DOMAIN} created on {DOMAIN_CREATION_DATE} for possible Fraud.
+        \n{DOMAIN} is being used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
+        \nThe malicious URL is {URL}.
+        \n\nRegards,\nDigital Crimes Unit - Engineers''',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'BRAND_TARGETED',
+                               'DOMAIN',
+                               'MALICIOUS_ACTIVITY',
+                               'DOMAIN_CREATION_DATE',
+                               'URL']
+    },
+    'intentionally_malicious_domain': {
+        'to': fraud_email,
+        'from': dcuinternal_email,
+        'subject': 'Suspected intentionally malicious activity',
+        'email_body': '''Dear Fraud,
+        \n\nPlease check account {ACCOUNT_NUMBER} for possible Fraud.
+        \n{DOMAIN} appears to be intentionally used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
+        \nThe malicious URL is {URL}.
+        \n\nRegards,\nDigital Crimes Unit - Engineers''',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'BRAND_TARGETED',
+                               'DOMAIN',
+                               'MALICIOUS_ACTIVITY',
+                               'URL']
+    }
+}
+
+''' SSL Templates '''
+_ssl_templates = {
+    'revocation': {
+        'to': ssl_email,
+        'from': dcuinternal_email,
         'subject': 'SSL revocation request',
         'email_body': '''Hello,\n\nThe Digital Crimes Unit is requesting the revocation of an SSL due to Terms of Service violations.
         \nShopper Number: {SHOPPER}\n\nCertificate Details:\n{CERT_DETAILS}\nRegards,\nDigital Crimes Unit\nGoDaddy''',
@@ -158,7 +184,7 @@ namespace_mappings = {
     'registered': _registered_templates,
     'foreign': _foreign_templates,
     'iris_shim': _iris_shim_templates,
-    'smtp': _smtp_templates
+    'ssl': _ssl_templates
 }
 
 templates = []  # Provides a list of all fully qualified template names <namespace>.<template>

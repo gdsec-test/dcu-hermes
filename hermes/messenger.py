@@ -31,7 +31,7 @@ def send_mail(template, substitution_values, **kwargs):
         if k not in expected_values:
             raise InvalidSubstitutionValuesException("Invalid substitution value provided {}".format(k))
 
-    if namespace == 'smtp':
+    if namespace in MailerFactory.smtp_templates:
         # For all SMTP/XARF related emails
         email_body = mapping.get('email_body', '')
         email_params = copy.deepcopy(mapping)
