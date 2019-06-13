@@ -51,6 +51,13 @@ _hosted_templates = {
                                'DOMAIN',
                                'MALICIOUS_CONTENT_REMOVED']
     },
+    'repeat_offender': {  # Template ID 4807
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'DCURepeatOffender',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN',
+                               'SANITIZED_URL']
+    },
     'suspend': {  # Template ID 3998
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'DCUHostingSuspension',
