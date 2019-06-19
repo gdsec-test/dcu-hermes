@@ -71,6 +71,12 @@ _hosted_templates = {
         'substitutionValues': ['ACCOUNT_NUMBER',
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY']
+    },
+    'extensive_compromise': {  # Template ID 4809
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'DCUExtensiveCompromise',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN']
     }
 }
 

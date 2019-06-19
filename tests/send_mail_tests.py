@@ -106,3 +106,9 @@ class TestSendMail:
         substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
                                'SHOPPER': '1234'}
         assert_raises(InvalidEmailRecipientException, send_mail, 'ssl.revocation', substitution_values, **{'env': 'dev'})
+
+    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
+    def test_send_extensive_compromise(self, mock_post):
+        substitution_values = {'DOMAIN': 'test-ext-compromise', 'ACCOUNT_NUMBER': 'test-id'}
+        actual = send_mail('hosted.extensive_compromise', substitution_values, **{'env': 'dev'})
+        assert_equal({'request_id': 'test-id'}, actual)
