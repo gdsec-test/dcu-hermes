@@ -48,8 +48,7 @@ _hosted_templates = {
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'DCUContentRemoved',
         'substitutionValues': ['ACCOUNT_NUMBER',
-                               'DOMAIN',
-                               'MALICIOUS_CONTENT_REMOVED']
+                               'DOMAIN']
     },
     'repeat_offender': {  # Template ID 4807
         'templateNamespaceKey': 'Iris',
