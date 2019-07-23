@@ -17,7 +17,7 @@ setup(
     author_email='dcueng@godaddy.com',
     description='Hermes provides an interface for interacting with GoDaddy messaging systems',
     long_description=long_description,
-    url='https://github.secureserver.net/ITSecurity/hermes',
+    url='https://github.secureserver.net/digital-crimes/hermes',
     packages=find_packages(exclude=['tests']),
     install_requires=install_reqs,
     tests_require=testing_reqs,
