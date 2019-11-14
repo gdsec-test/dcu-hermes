@@ -174,6 +174,21 @@ _fraud_templates = {
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY',
                                'URL']
+    },
+    'compromised_shopper_account': {
+        'to': fraud_email,
+        'from': dcuinternal_email,
+        'subject': 'Suspected compromised shopper account',
+        'email_body': '''Dear Fraud,
+        \n\nPlease check account {ACCOUNT_NUMBER} for possible Fraud as the account may have been compromised.
+        \n{DOMAIN} appears to be intentionally used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
+        \nThe malicious URL is {URL}.
+        \n\nRegards,\nDigital Crimes Unit - Engineers''',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'BRAND_TARGETED',
+                               'DOMAIN',
+                               'MALICIOUS_ACTIVITY',
+                               'URL']
     }
 }
 

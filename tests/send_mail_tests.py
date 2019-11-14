@@ -68,7 +68,7 @@ class TestSendMail:
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
                                'SHOPPER_CREATION_DATE': '2010-10-27', 'URL': 'hxxp://goodaddy.com/phish'}
         actual = send_mail('fraud.new_shopper_account', substitution_values,
-                           **{'env': 'dev', 'recipients': 'kmurthy@godaddy.com'})
+                           **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
@@ -77,7 +77,7 @@ class TestSendMail:
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
                                'DOMAIN_CREATION_DATE': '2010-10-27', 'URL': 'hxxp://goodaddy.com/phish'}
         actual = send_mail('fraud.new_domain_registration', substitution_values,
-                           **{'env': 'dev', 'recipients': 'kmurthy@godaddy.com'})
+                           **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
@@ -86,7 +86,16 @@ class TestSendMail:
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
                                'URL': 'hxxp://goodaddy.com/phish'}
         actual = send_mail('fraud.intentionally_malicious_domain', substitution_values,
-                           **{'env': 'dev', 'recipients': 'kmurthy@godaddy.com'})
+                           **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
+        assert_equal(actual, 'SUCCESS')
+
+    @patch('smtplib.SMTP.sendmail', return_value=None)
+    def test_send_compromised_shopper_account(self, mock_sendmail):
+        substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
+                               'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
+                               'URL': 'hxxp://goodaddy.com/phish'}
+        actual = send_mail('fraud.compromised_shopper_account', substitution_values,
+                           **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
