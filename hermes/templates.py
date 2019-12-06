@@ -18,6 +18,13 @@ _registered_templates = {
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY']
     },
+    'suspend_shopper_compromise': {  # Template ID 5282
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'CompromisedShopperAccount',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN',
+                               'MALICIOUS_ACTIVITY']
+    },
     'suspension_warning': {  # Template ID 3132
         'templateNamespaceKey': 'Hosting',
         'templateTypeKey': 'AbuseRegOnlyCustomer',
@@ -71,6 +78,13 @@ _hosted_templates = {
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY']
     },
+    'suspend_shopper_compromise': {  # Template ID 5282
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'CompromisedShopperAccount',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN',
+                               'MALICIOUS_ACTIVITY']
+    },
     'extensive_compromise': {  # Template ID 4809
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'DCUExtensiveCompromise',
@@ -108,12 +122,12 @@ _iris_shim_templates = {
         'templateTypeKey': 'ReportAbuse',
         'substitutionValues': []
     },
-    'report_successfully_parsed': { # Template ID 4396/4397
+    'report_successfully_parsed': {  # Template ID 4396/4397
         'templateNamespaceKey': 'Abuse',
         'templateTypeKey': 'AbuseReportReceived',
         'substitutionValues': []
     },
-    'report_successfully_closed': { # Template ID 4394/4395
+    'report_successfully_closed': {  # Template ID 4394/4395
         'templateNamespaceKey': 'Abuse',
         'templateTypeKey': 'AbuseReportFinished',
         'substitutionValues': []
