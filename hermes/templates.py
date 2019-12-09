@@ -21,9 +21,7 @@ _registered_templates = {
     'suspend_shopper_compromise': {  # Template ID 5282
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'CompromisedShopperAccount',
-        'substitutionValues': ['ACCOUNT_NUMBER',
-                               'DOMAIN',
-                               'MALICIOUS_ACTIVITY']
+        'substitutionValues': ['ACCOUNT_NUMBER']
     },
     'suspension_warning': {  # Template ID 3132
         'templateNamespaceKey': 'Hosting',
@@ -81,9 +79,7 @@ _hosted_templates = {
     'suspend_shopper_compromise': {  # Template ID 5282
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'CompromisedShopperAccount',
-        'substitutionValues': ['ACCOUNT_NUMBER',
-                               'DOMAIN',
-                               'MALICIOUS_ACTIVITY']
+        'substitutionValues': ['ACCOUNT_NUMBER']
     },
     'extensive_compromise': {  # Template ID 4809
         'templateNamespaceKey': 'Iris',
