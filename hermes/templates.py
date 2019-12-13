@@ -19,7 +19,7 @@ _registered_templates = {
                                'MALICIOUS_ACTIVITY']
     },
     'suspend_shopper_compromise': {  # Template ID 5282
-        'templateNamespaceKey': 'Iris',
+        'templateNamespaceKey': 'Abuse',
         'templateTypeKey': 'CompromisedShopperAccount',
         'substitutionValues': ['ACCOUNT_NUMBER']
     },
@@ -77,7 +77,7 @@ _hosted_templates = {
                                'MALICIOUS_ACTIVITY']
     },
     'suspend_shopper_compromise': {  # Template ID 5282
-        'templateNamespaceKey': 'Iris',
+        'templateNamespaceKey': 'Abuse',
         'templateTypeKey': 'CompromisedShopperAccount',
         'substitutionValues': ['ACCOUNT_NUMBER']
     },
