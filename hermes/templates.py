@@ -141,7 +141,7 @@ _fraud_templates = {
     'new_shopper_account': {
         'to': fraud_email,
         'from': dcuinternal_email,
-        'subject': 'Malicious activity on a newly created account.',
+        'subject': 'Malicious activity on a newly created account: {ACCOUNT_NUMBER}',
         'email_body': '''Dear Fraud,
         \n\nPlease check account {ACCOUNT_NUMBER} created on {SHOPPER_CREATION_DATE} for possible Fraud.
         \n{DOMAIN} is being used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
@@ -157,9 +157,9 @@ _fraud_templates = {
     'new_domain_registration': {
         'to': fraud_email,
         'from': dcuinternal_email,
-        'subject': 'Suspected malicious activity.',
+        'subject': 'Suspected malicious activity: {ACCOUNT_NUMBER}',
         'email_body': '''Dear Fraud,
-        \n\nPlease check account {ACCOUNT_NUMBER} which owns domain {DOMAIN} created on {DOMAIN_CREATION_DATE} for possible Fraud.
+        \n\nPlease check account {ACCOUNT_NUMBER} which owns domain {DOMAIN} created on {DOMAIN_CREATION_DATE} for possible Fraud or shopper compromise.
         \n{DOMAIN} is being used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
         \nThe malicious URL is {URL}.
         \n\nRegards,\nDigital Crimes Unit - Engineers''',
@@ -173,7 +173,7 @@ _fraud_templates = {
     'intentionally_malicious_domain': {
         'to': fraud_email,
         'from': dcuinternal_email,
-        'subject': 'Suspected intentionally malicious activity',
+        'subject': 'Suspected intentionally malicious activity: {ACCOUNT_NUMBER}',
         'email_body': '''Dear Fraud,
         \n\nPlease check account {ACCOUNT_NUMBER} for possible Fraud.
         \n{DOMAIN} appears to be intentionally used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.
@@ -188,7 +188,7 @@ _fraud_templates = {
     'compromised_shopper_account': {
         'to': fraud_email,
         'from': dcuinternal_email,
-        'subject': 'Suspected compromised shopper account',
+        'subject': 'Suspected compromised shopper account: {ACCOUNT_NUMBER}',
         'email_body': '''Dear Fraud,
         \n\nPlease check account {ACCOUNT_NUMBER} for possible Fraud as the account may have been compromised.
         \n{DOMAIN} appears to be intentionally used for {MALICIOUS_ACTIVITY} targeting {BRAND_TARGETED}.

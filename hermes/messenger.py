@@ -34,8 +34,10 @@ def send_mail(template, substitution_values, **kwargs):
     if namespace in MailerFactory.smtp_templates:
         # For all SMTP/XARF related emails
         email_body = mapping.get('email_body', '')
+        subject = mapping.get('subject', '')
         email_params = copy.deepcopy(mapping)
-        email_params.update({'email_body': email_body.format(**substitution_values)})
+        email_params.update({'email_body': email_body.format(**substitution_values),
+                             'subject': subject.format(**substitution_values)})
     else:
         # For all emails that need to be sent via OCM
         email_params = {'templateNamespaceKey': mapping.get('templateNamespaceKey'),
@@ -47,7 +49,6 @@ def send_mail(template, substitution_values, **kwargs):
 
 
 def get_status(template, identifier, **kwargs):
-
     namespace, t = template.split('.')
 
     if namespace not in namespace_mappings:
