@@ -7,7 +7,7 @@ from hermes.mailers.interface import SMTP
 
 
 class MailerFactory:
-    smtp_templates = {'ssl', 'fraud'}
+    smtp_templates = {'ssl', 'fraud', 'oceo'}
 
     @staticmethod
     def get_mailer(mailer_type, **kwargs):
