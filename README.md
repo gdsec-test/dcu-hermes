@@ -34,3 +34,12 @@ After this you may run the tests via
 ```
 nosetests --with-coverage --cover-package=hermes
 ```
+
+## Generating Test Email to Non-Shopper Account
+If you want to have a template emailed to a non-shopper testing email address, you'll need to ensure the runtime env is not `prod` and that the calling .py program has defined a `recipients` key in the `kwargs` parameter.
+
+Example:
+```python
+kwargs['recipients'] = 'my_testing_email@address.com'
+send_mail(template, substitution_values, **kwargs)
+```
