@@ -130,6 +130,15 @@ _iris_shim_templates = {
     }
 }
 
+''' Reporter Namespace Templates '''
+_reporter_templates = {  # Template ID 3454
+    'mail_reporter': {
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'AbuseAutoresponder',
+        'substitutionValues': {}
+    }
+}
+
 ''' SMTP TEMPLATES '''
 
 fraud_email = 'ccinquiries@godaddy.com'
@@ -235,7 +244,8 @@ namespace_mappings = {
     'foreign': _foreign_templates,
     'iris_shim': _iris_shim_templates,
     'ssl': _ssl_templates,
-    'oceo': _oceo_templates
+    'oceo': _oceo_templates,
+    'reporter': _reporter_templates
 }
 
 templates = []  # Provides a list of all fully qualified template names <namespace>.<template>

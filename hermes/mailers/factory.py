@@ -2,7 +2,8 @@ from hermes.mailers.ocm_interface import RegisteredMailer, \
     HostedMailer, \
     CSAMMailer, \
     ForeignMailer, \
-    IrisShimMailer
+    IrisShimMailer, \
+    ReporterMailer
 from hermes.mailers.interface import SMTP
 
 
@@ -21,5 +22,7 @@ class MailerFactory:
             return ForeignMailer(**kwargs)
         elif mailer_type == 'iris_shim':
             return IrisShimMailer(**kwargs)
+        elif mailer_type == 'reporter':
+            return ReporterMailer(**kwargs)
         elif mailer_type in MailerFactory.smtp_templates:
             return SMTP(**kwargs)

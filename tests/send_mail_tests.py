@@ -129,3 +129,9 @@ class TestSendMail:
         substitution_values = {'DOMAIN': 'test-ext-compromise', 'ACCOUNT_NUMBER': 'test-id'}
         actual = send_mail('hosted.extensive_compromise', substitution_values, **{'env': 'dev'})
         assert_equal({'request_id': 'test-id'}, actual)
+
+    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
+    def test_send_reporter_email(self, mock_post):
+        substitution_values = {}
+        actual = send_mail('reporter.mail_reporter', substitution_values, **{'env': 'dev'})
+        assert_equal({'request_id': 'test-id'}, actual)
