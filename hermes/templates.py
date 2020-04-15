@@ -37,6 +37,13 @@ _registered_templates = {
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY',
                                'SANITIZED_URL']
+    },
+    'repeat_offender': {  # Template ID 5493
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'Registered_Repeat_Offender_Domains',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN',
+                               'SANITIZED_URL']
     }
 }
 

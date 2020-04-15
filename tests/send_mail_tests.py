@@ -135,3 +135,10 @@ class TestSendMail:
         substitution_values = {}
         actual = send_mail('reporter.mail_reporter', substitution_values, **{'env': 'dev'})
         assert_equal({'request_id': 'test-id'}, actual)
+
+    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
+    def test_send_registered_repeat_offender(self, mock_post):
+        substitution_values = {'DOMAIN': 'reg-repeat-offender', 'ACCOUNT_NUMBER': 'test-id',
+                               'SANITIZED_URL': 'hxxp://reg-repeat-offender'}
+        actual = send_mail('registered.repeat_offender', substitution_values, **{'env': 'dev', 'domain_id': 1})
+        assert_equal({'request_id': 'test-id'}, actual)
