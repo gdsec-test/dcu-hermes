@@ -38,6 +38,12 @@ _registered_templates = {
                                'MALICIOUS_ACTIVITY',
                                'SANITIZED_URL']
     },
+    'forwarding_complaint': {  # Template ID 5518
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'ForwardedComplaintNotice',
+                'substitutionValues': ['ACCOUNT_NUMBER',
+                                       'SANITIZED_URL']
+    },
     'repeat_offender': {  # Template ID 5493
         'templateNamespaceKey': 'Abuse',
         'templateTypeKey': 'Registered_Repeat_Offender_Domains',
