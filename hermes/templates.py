@@ -157,7 +157,6 @@ _reporter_templates = {  # Template ID 3454
 fraud_email = 'ccinquiries@godaddy.com'
 ssl_email = 'practices@godaddy.com'
 dcuinternal_email = 'dcuinternal@godaddy.com'
-oceo_email = 'oceo@godaddy.com'
 
 ''' Fraud Namespace Templates '''
 _fraud_templates = {
@@ -237,17 +236,6 @@ _ssl_templates = {
     }
 }
 
-''' OCEO Namespace Templates '''
-_oceo_templates = {
-    'shopper_termination': {
-        'to': oceo_email,
-        'from': dcuinternal_email,
-        'subject': 'Malicious Content Customer Termination',
-        'email_body': '''Customer Number:\n{ACCOUNT_NUMBER}\n\nDomain Name:\n{DOMAIN}\n\nDescription of Malicious Content:\nIntentional {MALICIOUS_ACTIVITY}''',
-        'substitutionValues': ['ACCOUNT_NUMBER', 'DOMAIN', 'MALICIOUS_ACTIVITY']
-    }
-}
-
 
 namespace_mappings = {
     'fraud': _fraud_templates,
@@ -257,7 +245,6 @@ namespace_mappings = {
     'foreign': _foreign_templates,
     'iris_shim': _iris_shim_templates,
     'ssl': _ssl_templates,
-    'oceo': _oceo_templates,
     'reporter': _reporter_templates
 }
 

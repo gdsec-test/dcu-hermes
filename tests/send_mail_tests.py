@@ -90,14 +90,6 @@ class TestSendMail:
         assert_equal(actual, 'SUCCESS')
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
-    def test_send_oceo_termination_email(self, mock_sendmail):
-        substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
-                               'MALICIOUS_ACTIVITY': 'Phishing'}
-        actual = send_mail('oceo.shopper_termination', substitution_values,
-                           **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
-        assert_equal(actual, 'SUCCESS')
-
-    @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_compromised_shopper_account(self, mock_sendmail):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
