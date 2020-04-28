@@ -41,8 +41,8 @@ _registered_templates = {
     'forwarding_complaint': {  # Template ID 5518
         'templateNamespaceKey': 'Abuse',
         'templateTypeKey': 'ForwardedComplaintNotice',
-                'substitutionValues': ['ACCOUNT_NUMBER',
-                                       'SANITIZED_URL']
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'SANITIZED_URL']
     },
     'repeat_offender': {  # Template ID 5493
         'templateNamespaceKey': 'Abuse',
