@@ -62,6 +62,12 @@ class TestSendMail:
         actual = send_mail('csam.user_gen_warning', substitution_values, **{'env': 'dev'})
         assert_equal({'request_id': 'test-id'}, actual)
 
+    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps({'request_id': 'test-id'})))
+    def test_send_csam_suspend(self, mock_post):
+        substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://godaddy.com'}
+        actual = send_mail('csam.suspend', substitution_values, **{'env': 'dev'})
+        assert_equal({'request_id': 'test-id'}, actual)
+
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_fraud_new_shopper(self, mock_sendmail):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',

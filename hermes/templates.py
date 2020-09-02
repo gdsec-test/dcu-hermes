@@ -110,6 +110,12 @@ _csam_templates = {
         'substitutionValues': ['ACCOUNT_NUMBER',
                                'DOMAIN',
                                'LOCATION']
+    },
+    'suspend': {  # Template ID 5722
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'ChildAbuseInvestigation ',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN']
     }
 }
 
