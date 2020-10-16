@@ -50,6 +50,13 @@ _registered_templates = {
         'substitutionValues': ['ACCOUNT_NUMBER',
                                'DOMAIN',
                                'SANITIZED_URL']
+    },
+    'sucuri_warning': {  # Template ID 6041
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'DCUSucuriCustomerWarning',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN',
+                               'SANITIZED_URL']
     }
 }
 
@@ -99,6 +106,13 @@ _hosted_templates = {
         'templateTypeKey': 'DCUExtensiveCompromise',
         'substitutionValues': ['ACCOUNT_NUMBER',
                                'DOMAIN']
+    },
+    'sucuri_warning': {  # Template ID 6041
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'DCUSucuriCustomerWarning',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN',
+                               'SANITIZED_URL']
     }
 }
 
