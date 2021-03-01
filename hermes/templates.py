@@ -269,6 +269,6 @@ namespace_mappings = {
 }
 
 templates = []  # Provides a list of all fully qualified template names <namespace>.<template>
-for namespace, mappings in namespace_mappings.iteritems():
-    for template_name, _ in mappings.iteritems():
+for namespace, mappings in list(namespace_mappings.items()):
+    for template_name, _ in list(mappings.items()):
         templates.append(namespace + '.' + template_name)

@@ -5,9 +5,7 @@ from hermes.connectors.ocm import OCMClient
 from hermes.exceptions import UnsupportedValueException
 
 
-class OCM(Mailer):
-    __metaclass__ = abc.ABCMeta
-
+class OCM(Mailer, metaclass=abc.ABCMeta):
     def __init__(self, env=None, cert=None, key=None, **kwargs):
         """
         :param env: optional runtime env if exists in kwargs

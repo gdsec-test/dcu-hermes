@@ -12,6 +12,8 @@ from hermes.messenger import send_mail
 
 
 id_dict = {'request_id': 'test-id'}
+
+
 class TestSendMail:
     """ Tests basic functionality of driver and proper delegation of namespaces/templates """
     ''' Driver Tests '''
@@ -43,30 +45,35 @@ class TestSendMail:
         actual = send_mail('foreign.hosting_abuse_notice', substitution_values, **{'recipients': 'no-reply@godaddy.com',
                                                                                    'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_hosted(self, mock_post):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://godaddy.com', 'MALICIOUS_CONTENT_REPORTED': ''}
         actual = send_mail('hosted.suspension_warning', substitution_values, **{'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_registered(self, mock_post):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://godaddy.com', 'MALICIOUS_ACTIVITY': ''}
         actual = send_mail('registered.suspend_intentionally_malicious', substitution_values, **{'env': 'dev', 'domain_id': 1})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_csam(self, mock_post):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://godaddy.com', 'LOCATION': ''}
         actual = send_mail('csam.user_gen_warning', substitution_values, **{'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_csam_suspend(self, mock_post):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://godaddy.com'}
         actual = send_mail('csam.suspend', substitution_values, **{'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_fraud_new_shopper(self, mock_sendmail):
@@ -76,6 +83,7 @@ class TestSendMail:
         actual = send_mail('fraud.new_shopper_account', substitution_values,
                            **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
+        mock_sendmail.assert_called()
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_fraud_new_domain(self, mock_sendmail):
@@ -85,6 +93,7 @@ class TestSendMail:
         actual = send_mail('fraud.new_domain_registration', substitution_values,
                            **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
+        mock_sendmail.assert_called()
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_fraud_intentionally_malicious(self, mock_sendmail):
@@ -94,6 +103,7 @@ class TestSendMail:
         actual = send_mail('fraud.intentionally_malicious_domain', substitution_values,
                            **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
+        mock_sendmail.assert_called()
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_compromised_shopper_account(self, mock_sendmail):
@@ -103,12 +113,14 @@ class TestSendMail:
         actual = send_mail('fraud.compromised_shopper_account', substitution_values,
                            **{'env': 'dev', 'recipients': 'dcuinternal@godaddy.com'})
         assert_equal(actual, 'SUCCESS')
+        mock_sendmail.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_fail_parse(self, mock_post):
         substitution_values = {}
         actual = send_mail('iris_shim.failed_to_parse_report', substitution_values, **{'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_smtp_success(self, mock_sendmail):
@@ -116,6 +128,7 @@ class TestSendMail:
                                'SHOPPER': '1234'}
         actual = send_mail('ssl.revocation', substitution_values, **{'recipients': 'kmurthy@godaddy.com', 'env': 'dev'})
         assert_equal(actual, 'SUCCESS')
+        mock_sendmail.assert_called()
 
     def test_send_smtp_invalid_recipient(self):
         substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
@@ -127,12 +140,14 @@ class TestSendMail:
         substitution_values = {'DOMAIN': 'test-ext-compromise', 'ACCOUNT_NUMBER': 'test-id'}
         actual = send_mail('hosted.extensive_compromise', substitution_values, **{'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_reporter_email(self, mock_post):
         substitution_values = {}
         actual = send_mail('reporter.mail_reporter', substitution_values, **{'env': 'dev'})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_registered_repeat_offender(self, mock_post):
@@ -140,6 +155,7 @@ class TestSendMail:
                                'SANITIZED_URL': 'hxxp://reg-repeat-offender'}
         actual = send_mail('registered.repeat_offender', substitution_values, **{'env': 'dev', 'domain_id': 1})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_registered_sucuri_warning(self, mock_post):
@@ -147,6 +163,7 @@ class TestSendMail:
                                'SANITIZED_URL': 'hxxp://reg-sucuri-warning'}
         actual = send_mail('registered.sucuri_warning', substitution_values, **{'env': 'dev', 'domain_id': 1})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_hosted_sucuri_warning(self, mock_post):
@@ -154,3 +171,4 @@ class TestSendMail:
                                'SANITIZED_URL': 'hxxp://hosted-sucuri-warning'}
         actual = send_mail('hosted.sucuri_warning', substitution_values, **{'env': 'dev', 'domain_id': 1})
         assert_equal(id_dict, actual)
+        mock_post.assert_called()

@@ -5,7 +5,7 @@ from hermes.exceptions import UnsupportedNamespaceException, \
     UnsupportedTemplateException
 
 from hermes.mailers.factory import MailerFactory
-from templates import namespace_mappings
+from .templates import namespace_mappings
 
 
 def send_mail(template, substitution_values, **kwargs):
@@ -23,11 +23,11 @@ def send_mail(template, substitution_values, **kwargs):
     mapping = namespace_mappings[namespace][t]
 
     expected_values = mapping['substitutionValues']
-    if len(expected_values) != len(substitution_values.keys()):
+    if len(expected_values) != len(list(substitution_values.keys())):
         raise InvalidSubstitutionValuesException("Incorrect number of values provided. Expected {} got {}".format(
-            len(expected_values), len(substitution_values.keys())))
+            len(expected_values), len(list(substitution_values.keys()))))
 
-    for k, v in substitution_values.iteritems():
+    for k, v in list(substitution_values.items()):
         if k not in expected_values:
             raise InvalidSubstitutionValuesException("Invalid substitution value provided {}".format(k))
 

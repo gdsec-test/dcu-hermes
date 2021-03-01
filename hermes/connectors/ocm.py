@@ -47,7 +47,7 @@ class OCMClient:
         return json.loads(response.text)
 
     def get_status(self, message_id):
-        assert isinstance(message_id, basestring)
+        assert isinstance(message_id, str)
 
         headers = {'Accept': 'application/json',
                    'Content-Type': 'application/json'}

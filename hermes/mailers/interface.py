@@ -6,9 +6,7 @@ from hermes.exceptions import InvalidEmailRecipientException, SMTPException
 from smtplib import SMTPRecipientsRefused
 
 
-class Mailer:
-    __metaclass__ = abc.ABCMeta
-
+class Mailer(metaclass=abc.ABCMeta):
     def __init__(self, **kwargs):
         self._client = None
 
