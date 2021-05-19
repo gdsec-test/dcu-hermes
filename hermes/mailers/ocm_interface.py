@@ -102,8 +102,7 @@ class IrisShimMailer(OCM):
         :param recipients: optional 'recipients' key if exists in kwargs
         :param kwargs: used indirectly by recipients
         """
-        if self.env != 'prod' and recipients:
-            email_params['recipients'] = recipients
+        email_params['recipients'] = recipients
 
         return self._client.send_non_shopper_email(email_params)
 

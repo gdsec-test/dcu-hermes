@@ -12,7 +12,7 @@ with open('README.md') as f:
 
 setup(
     name='hermes',
-    version='1.0',
+    version='1.0.1',
     author='DCU',
     author_email='dcueng@godaddy.com',
     description='Hermes provides an interface for interacting with GoDaddy messaging systems',
