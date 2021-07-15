@@ -62,4 +62,3 @@ class OCMClient:
         if resp_dict.get('status') not in self.success_status:
             raise OCMException(resp_dict.get('failureReason'))
         return resp_dict.get('status')
-

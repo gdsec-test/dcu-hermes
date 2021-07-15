@@ -53,7 +53,7 @@ class RegisteredMailer(OCM):
             'sendToShopper': True,
             'transformationData': {
                 'domainContactLookup': ['Administrative'],
-                'domains':  [{'id': domain_id, 'name': email_params.get('substitutionValues').get('DOMAIN')}]
+                'domains': [{'id': domain_id, 'name': email_params.get('substitutionValues').get('DOMAIN')}]
             }
         })
         return self._client.send_shopper_email(email_params)
