@@ -88,10 +88,9 @@ class ForeignMailer(OCM):
         :param recipients: optional 'recipients' key if exists in kwargs
         :param kwargs: used indirectly by recipients
         """
-        if self.env != 'prod' and recipients:
+        if recipients:
             email_params['recipients'] = recipients
-
-        return self._client.send_non_shopper_email(email_params)
+            return self._client.send_non_shopper_email(email_params)
 
 
 class IrisShimMailer(OCM):
@@ -102,9 +101,9 @@ class IrisShimMailer(OCM):
         :param recipients: optional 'recipients' key if exists in kwargs
         :param kwargs: used indirectly by recipients
         """
-        email_params['recipients'] = recipients
-
-        return self._client.send_non_shopper_email(email_params)
+        if recipients:
+            email_params['recipients'] = recipients
+            return self._client.send_non_shopper_email(email_params)
 
 
 class ReporterMailer(OCM):
@@ -115,7 +114,6 @@ class ReporterMailer(OCM):
         :param recipients: required 'recipients' key should exist in kwargs
         :param kwargs: used indirectly by recipients
         """
-
-        email_params['recipients'] = recipients
-
-        return self._client.send_non_shopper_email(email_params)
+        if recipients:
+            email_params['recipients'] = recipients
+            return self._client.send_non_shopper_email(email_params)
