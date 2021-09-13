@@ -113,6 +113,12 @@ _hosted_templates = {
         'substitutionValues': ['ACCOUNT_NUMBER',
                                'DOMAIN',
                                'SANITIZED_URL']
+    },
+    'suspend_pci_compliance': {  # Template ID 6471
+        'templateNamespaceKey': 'Abuse',
+        'templateTypeKey': 'PCIComplianceSuspension',
+        'substitutionValues': ['ACCOUNT_NUMBER',
+                               'DOMAIN']
     }
 }
 

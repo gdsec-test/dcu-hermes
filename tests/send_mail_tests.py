@@ -172,3 +172,10 @@ class TestSendMail:
         actual = send_mail('hosted.sucuri_warning', substitution_values, **{'env': 'dev', 'domain_id': 1})
         assert_equal(id_dict, actual)
         mock_post.assert_called()
+
+    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
+    def test_send_suspend_pci_compliance(self, mock_post):
+        substitution_values = {'DOMAIN': 'hosted-pci-suspend', 'ACCOUNT_NUMBER': 'test-id'}
+        actual = send_mail('hosted.suspend_pci_compliance', substitution_values, **{'env': 'dev', 'domain_id': 1})
+        assert_equal(id_dict, actual)
+        mock_post.assert_called()
