@@ -7,7 +7,7 @@ This library serves as a limited interface for interacting with mailing systems 
 Cloning the project can be achieved via
 
 ```
-git clone git@github.secureserver.net:digital-crimes/hermes.git
+git clone git@github.com:gdcorp-infosec/dcu-hermes.git
 ```
 
 ## Installing Dependencies
@@ -17,11 +17,7 @@ pip install -r requirements.txt
 ```
 
 ## Installing
-To install the Hermes library, you can use the following command
-```
-pip install git+ssh//git@github.secureserver.net/digital-crimes/hermes.git
-```
-or `pip install .` after cloning the repository.
+To install the Hermes library, run `pip install .` after cloning the repository.
 
 
 ## Testing
