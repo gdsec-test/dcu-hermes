@@ -12,12 +12,12 @@ with open('README.md') as f:
 
 setup(
     name='hermes',
-    version='1.0.1',
+    version='1.0.2',
     author='DCU',
     author_email='dcueng@godaddy.com',
     description='Hermes provides an interface for interacting with GoDaddy messaging systems',
     long_description=long_description,
-    url='https://github.secureserver.net/digital-crimes/hermes',
+    url='https://github.com/gdcorp-infosec/dcu-hermes',
     packages=find_packages(exclude=['tests']),
     install_requires=install_reqs,
     tests_require=testing_reqs,

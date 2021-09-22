@@ -118,7 +118,8 @@ class TestSendMail:
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_fail_parse(self, mock_post):
         substitution_values = {}
-        actual = send_mail('iris_shim.failed_to_parse_report', substitution_values, **{'env': 'dev'})
+        kw_args = {'env': 'dev', 'recipients': 'non-shopper-email-address'}
+        actual = send_mail('iris_shim.failed_to_parse_report', substitution_values, **kw_args)
         assert_equal(id_dict, actual)
         mock_post.assert_called()
 
@@ -145,7 +146,8 @@ class TestSendMail:
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_reporter_email(self, mock_post):
         substitution_values = {}
-        actual = send_mail('reporter.mail_reporter', substitution_values, **{'env': 'dev'})
+        kw_args = {'env': 'dev', 'recipients': 'non-shopper-email-address'}
+        actual = send_mail('reporter.mail_reporter', substitution_values, **kw_args)
         assert_equal(id_dict, actual)
         mock_post.assert_called()
 
