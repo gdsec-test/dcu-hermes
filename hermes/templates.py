@@ -170,10 +170,10 @@ _iris_shim_templates = {
 }
 
 ''' Reporter Namespace Templates '''
-_reporter_templates = {  # Template ID 3454
-    'mail_reporter': {
+_reporter_templates = {
+    'mail_reporter': {  # Template ID 7010
         'templateNamespaceKey': 'Iris',
-        'templateTypeKey': 'AbuseAutoresponder',
+        'templateTypeKey': 'AbuseReportConfirmation',
         'substitutionValues': {}
     }
 }
