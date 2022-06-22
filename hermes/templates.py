@@ -18,9 +18,9 @@ _registered_templates = {
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY']
     },
-    'suspend_shopper_compromise': {  # Template ID 5282
+    'suspend_shopper_compromise': {  # Template ID 6480
         'templateNamespaceKey': 'Abuse',
-        'templateTypeKey': 'CompromisedShopperAccount',
+        'templateTypeKey': 'CustomersSecurityIncident',
         'substitutionValues': ['ACCOUNT_NUMBER']
     },
     'suspension_warning': {  # Template ID 3132
@@ -96,9 +96,9 @@ _hosted_templates = {
                                'DOMAIN',
                                'MALICIOUS_ACTIVITY']
     },
-    'suspend_shopper_compromise': {  # Template ID 5282
+    'suspend_shopper_compromise': {  # Template ID 6480
         'templateNamespaceKey': 'Abuse',
-        'templateTypeKey': 'CompromisedShopperAccount',
+        'templateTypeKey': 'CustomersSecurityIncident',
         'substitutionValues': ['ACCOUNT_NUMBER']
     },
     'extensive_compromise': {  # Template ID 4809
