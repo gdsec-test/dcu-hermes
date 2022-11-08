@@ -6,7 +6,7 @@ from hermes.exceptions import UnsupportedEnvironmentException, OCMException
 
 
 class OCMClient:
-    supported_environments = ['dev', 'test' 'prod']
+    supported_environments = ['dev', 'test', 'prod']
     success_status = ['PURGED', 'PENDING', 'SUCCESS']  # Everything but 'FAILED'
 
     def __init__(self, env, cert):
