@@ -6,7 +6,7 @@ from hermes.exceptions import UnsupportedEnvironmentException, OCMException
 
 
 class OCMClient:
-    supported_environments = ['dev', 'prod']
+    supported_environments = ['dev', 'test' 'prod']
     success_status = ['PURGED', 'PENDING', 'SUCCESS']  # Everything but 'FAILED'
 
     def __init__(self, env, cert):
@@ -18,6 +18,9 @@ class OCMClient:
         if env == 'prod':
             self.non_shopper_endpoint = 'https://messaging.api.int.godaddy.com/v1/messaging/messages/sendNonShopper'
             self.shopper_endpoint = 'https://messaging.api.int.godaddy.com/v1/messaging/messages'
+        elif env == 'test':
+            self.non_shopper_endpoint = 'https://messaging.api.int.test-godaddy.com/v1/messaging/messages/sendNonShopper'
+            self.shopper_endpoint = 'https://messaging.api.int.test-godaddy.com/v1/messaging/messages'
         else:
             self.non_shopper_endpoint = 'https://messaging.api.int.dev-godaddy.com/v1/messaging/messages/sendNonShopper'
             self.shopper_endpoint = 'https://messaging.api.int.dev-godaddy.com/v1/messaging/messages'
