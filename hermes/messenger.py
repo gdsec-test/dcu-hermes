@@ -1,10 +1,10 @@
 import copy
 
-from hermes.exceptions import UnsupportedNamespaceException, \
-    InvalidSubstitutionValuesException, \
-    UnsupportedTemplateException
-
+from hermes.exceptions import (InvalidSubstitutionValuesException,
+                               UnsupportedNamespaceException,
+                               UnsupportedTemplateException)
 from hermes.mailers.factory import MailerFactory
+
 from .templates import namespace_mappings
 
 

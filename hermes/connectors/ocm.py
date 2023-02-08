@@ -3,7 +3,7 @@ from typing import Optional
 
 import requests
 
-from hermes.exceptions import UnsupportedEnvironmentException, OCMException
+from hermes.exceptions import OCMException, UnsupportedEnvironmentException
 
 
 class OCMClient:

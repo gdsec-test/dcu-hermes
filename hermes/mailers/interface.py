@@ -1,9 +1,9 @@
 import abc
 import smtplib
-
 from email.mime.text import MIMEText
-from hermes.exceptions import InvalidEmailRecipientException, SMTPException
 from smtplib import SMTPRecipientsRefused
+
+from hermes.exceptions import InvalidEmailRecipientException, SMTPException
 
 
 class Mailer(metaclass=abc.ABCMeta):

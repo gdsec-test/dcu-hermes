@@ -1,8 +1,8 @@
 import abc
 
-from hermes.mailers.interface import Mailer
 from hermes.connectors.ocm import OCMClient
 from hermes.exceptions import UnsupportedValueException
+from hermes.mailers.interface import Mailer
 
 
 class OCM(Mailer, metaclass=abc.ABCMeta):

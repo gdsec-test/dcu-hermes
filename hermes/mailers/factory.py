@@ -1,10 +1,7 @@
-from hermes.mailers.ocm_interface import RegisteredMailer, \
-    HostedMailer, \
-    CSAMMailer, \
-    ForeignMailer, \
-    IrisShimMailer, \
-    ReporterMailer
 from hermes.mailers.interface import SMTP
+from hermes.mailers.ocm_interface import (CSAMMailer, ForeignMailer,
+                                          HostedMailer, IrisShimMailer,
+                                          RegisteredMailer, ReporterMailer)
 
 
 class MailerFactory:

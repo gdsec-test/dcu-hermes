@@ -12,7 +12,7 @@ with open('README.md') as f:
 
 setup(
     name='hermes',
-    version='1.1.0',
+    version='1.2.0',
     author='DCU',
     author_email='dcueng@godaddy.com',
     description='Hermes provides an interface for interacting with GoDaddy messaging systems',
@@ -23,6 +23,6 @@ setup(
     tests_require=testing_reqs,
     test_suite='nose.collector',
     classifiers=[
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.11.1'
     ]
 )
