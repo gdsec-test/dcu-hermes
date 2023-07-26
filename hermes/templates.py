@@ -250,7 +250,6 @@ namespace_mappings = {
     'hosted': _hosted_templates,
     'registered': _registered_templates,
     'foreign': _foreign_templates,
-    'iris_shim': _iris_shim_templates,
     'ssl': _ssl_templates,
     'reporter': _reporter_templates
 }

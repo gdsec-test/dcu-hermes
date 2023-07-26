@@ -113,14 +113,6 @@ class TestSendMail(TestCase):
         self.assertEqual(actual, 'SUCCESS')
         mock_sendmail.assert_called()
 
-    @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
-    def test_send_fail_parse(self, mock_post):
-        substitution_values = {}
-        kw_args = {'env': 'dev', 'recipients': 'non-shopper-email-address'}
-        actual = send_mail('iris_shim.failed_to_parse_report', substitution_values, **kw_args)
-        self.assertEqual(id_dict, actual)
-        mock_post.assert_called()
-
     @patch('smtplib.SMTP.sendmail', return_value=None)
     def test_send_smtp_success(self, mock_sendmail):
         substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
