@@ -141,31 +141,12 @@ _csam_templates = {
 
 ''' Foreign Namespace Templates '''
 _foreign_templates = {
-    'hosting_abuse_notice': {  # Template ID 3103/3104
+    'hosting_abuse_notice': {  # Template ID 3103
         'templateNamespaceKey': 'Hosting',
         'templateTypeKey': 'AbuseRegOnlyToHost',
         'substitutionValues': ['DOMAIN',
                                'SANITIZED_URL',
                                'IPADDRESS']
-    }
-}
-
-''' Iris Shim Templates '''
-_iris_shim_templates = {
-    'failed_to_parse_report': {  # Template ID 4320/4321
-        'templateNamespaceKey': 'Iris',
-        'templateTypeKey': 'ReportAbuse',
-        'substitutionValues': []
-    },
-    'report_successfully_parsed': {  # Template ID 4396/4397
-        'templateNamespaceKey': 'Abuse',
-        'templateTypeKey': 'AbuseReportReceived',
-        'substitutionValues': []
-    },
-    'report_successfully_closed': {  # Template ID 4394/4395
-        'templateNamespaceKey': 'Abuse',
-        'templateTypeKey': 'AbuseReportFinished',
-        'substitutionValues': []
     }
 }
 
@@ -269,7 +250,6 @@ namespace_mappings = {
     'hosted': _hosted_templates,
     'registered': _registered_templates,
     'foreign': _foreign_templates,
-    'iris_shim': _iris_shim_templates,
     'ssl': _ssl_templates,
     'reporter': _reporter_templates
 }
