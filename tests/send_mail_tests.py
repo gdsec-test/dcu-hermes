@@ -40,8 +40,7 @@ class TestSendMail(TestCase):
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
     def test_send_foreign(self, mock_post):
         substitution_values = {'DOMAIN': 'test-domain', 'SANITIZED_URL': 'hxxp://godaddy.com', 'IPADDRESS': 'test-ip'}
-        actual = send_mail('foreign.hosting_abuse_notice', substitution_values, **{'recipients': 'no-reply@godaddy.com',
-                                                                                   'env': 'dev'})
+        actual = send_mail('foreign.hosting_abuse_notice', substitution_values, **{'recipients': 'no-reply_email', 'env': 'dev'})
         self.assertEqual(id_dict, actual)
         mock_post.assert_called()
 
@@ -73,7 +72,7 @@ class TestSendMail(TestCase):
         self.assertEqual(id_dict, actual)
         mock_post.assert_called()
 
-    @patch('smtplib.SMTP.sendmail', return_value=None)
+    @patch('hermes.mailers.interface.SMTP.send_mail', return_value='SUCCESS')
     def test_send_fraud_new_shopper(self, mock_sendmail):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
@@ -83,7 +82,7 @@ class TestSendMail(TestCase):
         self.assertEqual(actual, 'SUCCESS')
         mock_sendmail.assert_called()
 
-    @patch('smtplib.SMTP.sendmail', return_value=None)
+    @patch('hermes.mailers.interface.SMTP.send_mail', return_value='SUCCESS')
     def test_send_fraud_new_domain(self, mock_sendmail):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
@@ -93,7 +92,7 @@ class TestSendMail(TestCase):
         self.assertEqual(actual, 'SUCCESS')
         mock_sendmail.assert_called()
 
-    @patch('smtplib.SMTP.sendmail', return_value=None)
+    @patch('hermes.mailers.interface.SMTP.send_mail', return_value='SUCCESS')
     def test_send_fraud_intentionally_malicious(self, mock_sendmail):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
@@ -103,7 +102,7 @@ class TestSendMail(TestCase):
         self.assertEqual(actual, 'SUCCESS')
         mock_sendmail.assert_called()
 
-    @patch('smtplib.SMTP.sendmail', return_value=None)
+    @patch('hermes.mailers.interface.SMTP.send_mail', return_value='SUCCESS')
     def test_send_compromised_shopper_account(self, mock_sendmail):
         substitution_values = {'ACCOUNT_NUMBER': 'test-id', 'DOMAIN': 'hxxp://goodaddy.com',
                                'BRAND_TARGETED': 'godaddy.com', 'MALICIOUS_ACTIVITY': 'Phishing',
@@ -113,17 +112,17 @@ class TestSendMail(TestCase):
         self.assertEqual(actual, 'SUCCESS')
         mock_sendmail.assert_called()
 
-    @patch('smtplib.SMTP.sendmail', return_value=None)
+    @patch('hermes.mailers.interface.SMTP.send_mail', return_value='SUCCESS')
     def test_send_smtp_success(self, mock_sendmail):
         substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
                                'SHOPPER': '1234'}
-        actual = send_mail('ssl.revocation', substitution_values, **{'recipients': 'kmurthy@godaddy.com', 'env': 'dev'})
+        actual = send_mail('ssl.revocation', substitution_values, **{'recipients': 'kmurthy_email', 'env': 'dev'})
         self.assertEqual(actual, 'SUCCESS')
         mock_sendmail.assert_called()
 
-    def test_send_smtp_invalid_recipient(self):
-        substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''',
-                               'SHOPPER': '1234'}
+    @patch('hermes.mailers.interface.SMTP.send_mail', side_effect=InvalidEmailRecipientException())
+    def test_send_smtp_invalid_recipient(self, mockSendMail):
+        substitution_values = {'CERT_DETAILS': '''Common Name: *.abc.com \tCreated Date: 2010-10-27\tExpiration Date: 2019-10-28\n''', 'SHOPPER': '1234'}
         self.assertRaises(InvalidEmailRecipientException, send_mail, 'ssl.revocation', substitution_values, **{'env': 'dev'})
 
     @patch('requests.post', return_value=MagicMock(status_code=201, text=dumps(id_dict)))
