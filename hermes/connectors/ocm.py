@@ -35,7 +35,7 @@ class OCMClient:
         return self._make_request(self.shopper_endpoint, headers, email_params)
 
     def send_non_shopper_email(self, email_params):
-        headers = {'Accept': 'application/json', 'X-Private-Label-Id': '1'}
+        headers = {'Accept': 'application/json', 'X-Private-Label-Id': '10'}
         return self._make_request(self.non_shopper_endpoint, headers, email_params)
 
     def get_status(self, message_id):
