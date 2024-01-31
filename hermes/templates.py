@@ -156,6 +156,11 @@ _reporter_templates = {
         'templateNamespaceKey': 'Iris',
         'templateTypeKey': 'AbuseReportConfirmation',
         'substitutionValues': {}
+    },
+    'mail_reporter_dsa': {  # Template ID 7010
+        'templateNamespaceKey': 'Iris',
+        'templateTypeKey': 'DSAAutoResponder',
+        'substitutionValues': {}
     }
 }
 
