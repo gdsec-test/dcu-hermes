@@ -107,7 +107,7 @@ class IrisShimMailer(OCM):
 
 
 class ReporterMailer(OCM):
-    def send_mail(self, email_params, recipients=None, **kwargs):
+    def send_mail(self, email_params, recipients=None, plid='1', **kwargs):
         """
         This method will always send to a non-shopper email address.
         :param email_params: dict containing substitution values and keys
@@ -116,4 +116,4 @@ class ReporterMailer(OCM):
         """
         if recipients:
             email_params['recipients'] = recipients
-            return self._client.send_non_shopper_email(email_params)
+            return self._client.send_non_shopper_email(email_params=email_params, plid=plid)
